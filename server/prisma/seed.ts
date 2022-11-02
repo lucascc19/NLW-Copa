@@ -16,10 +16,20 @@ async function main(){
             title: 'Exemple Pool',
             code: 'BOL123',
             ownerId: user.id,
+
+            participants: {
+                create: {
+                    user.id
+                }
+            }
         }
     })
 
-    const participant = await prisma.participant.create
+    await prisma.game.create({
+        data: {
+            date: '2022-11-03'
+        }
+    })
 }
 
 main()

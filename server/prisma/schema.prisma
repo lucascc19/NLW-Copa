@@ -21,7 +21,7 @@ model Pool {
   createAt DateTime @default(now())
   ownerId  String?
 
-  Participants Participant[]
+  participants Participant[]
   owner        User?         @relation(fields: [ownerId], references: [id])
 }
 
