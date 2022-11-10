@@ -5,9 +5,11 @@ import { api } from '../services/api';
 
 import { Game, GameProps } from '../components/Game';
 import { Loading } from './Loading';
+import { EmptyMyPoolList } from './EmptyMyPoolList';
 
 interface Props {
   poolId: string;
+  code: string;
 }
 
 export function Guesses({ poolId }: Props) {
@@ -18,7 +20,6 @@ export function Guesses({ poolId }: Props) {
 
   const toast = useToast();
 
-  
   async function fetchGames(){
     try{
       setIsLoading(true);
@@ -26,7 +27,6 @@ export function Guesses({ poolId }: Props) {
       const response = await api.get(`/pools/${poolId}/games`);
       setGames(response.data.games);
     }catch (error){
-      console.log(error);
       toast.show({
         title: 'Não foi possível carregar os jogos',
         placement: 'top',
@@ -72,7 +72,7 @@ export function Guesses({ poolId }: Props) {
 
   useEffect(() => {
     fetchGames();
-  }, [poolId]);
+  }, []);
 
   if(isLoading){
     return <Loading /> 
@@ -91,6 +91,7 @@ export function Guesses({ poolId }: Props) {
       />
     )}
     _contentContainerStyle={{ pb:10 }}
+    ListEmptyComponent={() => <EmptyMyPoolList code={code} />}
     />
   );
 }

@@ -33,7 +33,7 @@ interface Props {
 export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessConfirm }: Props) {
   const { colors, sizes } = useTheme();
 
-  const when = dayjs(data.date).format("DD [de] MMMM [de] YYYY [às] HH:00[h]");
+  const when = dayjs(data.date).locale(ptBR).format("DD [de] MMMM [de] YYYY [às] HH:00[h]");
 
   return (
     <VStack
